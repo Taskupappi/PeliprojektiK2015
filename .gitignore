@@ -41,3 +41,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/SFML-2.2/doc
+/SFML-2.2/examples
+/SFML_setup_30.1/Debug
+/SFML_setup_30.1/SFML_setup_30.1/obj/Debug
