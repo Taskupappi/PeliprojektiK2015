@@ -1,39 +1,110 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Config.hpp>
+#include <SFML/Main.hpp>
+#include <SFML/System.hpp>
+#include <SFML/OpenGL.hpp>
+#include <cmath>
+#include <math.h>
+
+//#include "Tank_hull.h"
+
+
+#define M_PI 3.14159265358979323846 /* pi */
+
+//#include <SFML/Audio.hhp>
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1200, 1200), "SFML works!");
+	//-----------------------------Tank Creation-----------------------------------------------//
+	//Tank_hull Tank_hull1();
+
+
+	//-----------------------------------------------------------------------------//
+
+	
+
+	//--------------------------Screen_setup---------------------------------------//
+	sf::Vector2i screen_dimensions(1240, 720);
+	sf::RenderWindow window;
+	window.create(sf::VideoMode(screen_dimensions.x, screen_dimensions.y), "Tank Hunter Arcade");
 	window.setFramerateLimit(60);
 
-	sf::CircleShape shape(20.f);
-	shape.setFillColor(sf::Color::Green);
 
-	sf::Texture texture;
-	texture.loadFromFile("tank_hull.png");
-	texture.setSmooth(true);
-	sf::Texture texture2;
-	texture2.loadFromFile("tank_tower.png");
-	texture2.setSmooth(true);
-
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-	sf::Sprite sprite2;
-	sprite2.setTexture(texture2);
-	sprite2.setColor(sf::Color(255, 255, 255, 128));
-
-	sprite.setPosition(450, 450);
-	sprite2.setPosition(450, 450);
-	sprite2.setOrigin(400, 400);
-	sprite.setOrigin(400, 400);
-
-	sprite.setScale(0.5, 0.5);
-	sprite2.setScale(0.5, 0.5);
+	//-------------------------------------------------------------//
 
 
-	int rot = 0;
-	int rot2 = 0;
+	//-----------------------------Something--------------------------------//
+	//window.setKeyRepeatEnabled(false);
+	//srand(time(0));
+	//---------------------------------------------------------------//
+
+
+	//----------Background-----------------------------------//
+	sf::Texture texture_green_background;
+	texture_green_background.loadFromFile("green_background.png");
+	sf::Sprite sprite_green_background;
+	sprite_green_background.setTexture(texture_green_background);
+	sprite_green_background.setPosition(450, 200);
+	//---------------------------------------------------//
+
+
+	//--------------------View_options-------------------------------//
+
+	sf::View view;
+	view.reset(sf::FloatRect(0, 0, screen_dimensions.x, screen_dimensions.y));
+	view.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f));
+	//----------------------------------------------------------------//
+
+
+
+	//--------------------Tank----------------------------//
+	sf::Texture texture_tank_hull;
+	texture_tank_hull.loadFromFile("tank_hull.png");
+
+	sf::Texture texture_tank_turret;
+	texture_tank_turret.loadFromFile("tank_tower.png");
+
+	sf::Sprite sprite_tank_hull;
+	sprite_tank_hull.setTexture(texture_tank_hull);
+
+	sf::Sprite sprite_tank_turret;
+	sprite_tank_turret.setTexture(texture_tank_turret);
+
+	sprite_tank_hull.setPosition(450, 450);
+	sprite_tank_hull.setOrigin(400, 400);
+
+	sprite_tank_turret.setPosition(450, 450);
+	sprite_tank_turret.setOrigin(400, 400);
+
+	sprite_tank_hull.setScale(0.2, 0.2);
+	sprite_tank_turret.setScale(0.2, 0.2);
+
+
+	//----------------Tank_rotation_and_movement-----------------------------------------------------//
+	int rot_turret = 0;
+	int rot_hull = 0;
+
+	double speed = 5;
+	double angle = 60 * M_PI / 2;
+
+	double move_x = speed * cos(angle);
+	double move_y = speed * sin(angle);
+	//Sprites[0].move(std::cos(3.14159265 * Sprites[0].getRotation() / 180.f) * (float)Player.getSpeed() * ElapsedTime, std::sin(3.14159265 * Sprites[0].getRotation() / 180.f) * (float)Player.getSpeed() * ElapsedTime);
+
+
+
+	//-----------------------------------------------------------------------------------------------//
+
+
+
+	//------------------------------------Game_loop-------------------------------------------------//
 	while (window.isOpen())
 	{
+		sf::Clock clock;
+		sf::Time elapsed = clock.getElapsedTime();
+
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -46,49 +117,134 @@ int main()
 				case sf::Keyboard::Escape:
 					window.close();
 					break;
-				case sf::Keyboard::Return:
-					shape.setRadius(shape.getRadius() + 10);
-					break;
 				}
 
 			}
 
 		}
+		//---------------------------------------------------------------------------------//
+
+
+		//----------------------------Controls-----------------------------------------//
+
+
+
+		//---------------------------------Turret--------------------------------------//
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			rot--;
-			if (rot > 360)
-				rot = 0;
-			sprite2.setRotation(rot);
+
+
+			rot_turret--;
+
+			if (rot_turret > 360)
+			{
+				rot_turret = 0;
+			}
+			sprite_tank_turret.setRotation(rot_turret);
+
 		}
+
+		/*
+		double move_x = speed * cos(angle);
+		double move_y = speed * sin(angle);
+		*/
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			rot++;
-			if (rot > 360)
-				rot = 0;
-			sprite2.setRotation(rot);
+
+			rot_turret++;
+
+			if (rot_turret > 360)
+			{
+				rot_turret = 0;
+			}
+			sprite_tank_turret.setRotation(rot_turret);
 		}
+
+		//---------------------------------Hull--------------------------------------//
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			rot2--;
-			if (rot2 > 360)
-				rot2 = 0;
-			sprite.setRotation(rot2);
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			{
+				rot_turret++;
+			}
+
+
+
+			rot_turret--;
+
+			if (rot_turret > 360)
+			{
+				rot_turret = 0;
+			}
+			sprite_tank_turret.setRotation(rot_turret);
+
+
+			rot_hull--;
+
+			if (rot_hull > 360)
+			{
+				rot_hull = 0;
+			}
+			sprite_tank_hull.setRotation(rot_hull);
+
 		}
+
+
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			rot2++;
-			if (rot2 > 360)
-				rot2 = 0;
-			sprite.setRotation(rot2);
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			{
+				rot_turret--;
+
+			}
+
+			rot_turret++;
+
+			if (rot_turret > 360)
+			{
+				rot_turret = 0;
+			}
+			sprite_tank_turret.setRotation(rot_turret);
+
+
+
+			rot_hull++;
+
+			if (rot_hull > 360)
+			{
+				rot_hull = 0;
+			}
+			sprite_tank_hull.setRotation(rot_hull);
 		}
 
-		shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			sprite_tank_hull.move(0, -1);
+			sprite_tank_turret.move(0, -1);
+
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			sprite_tank_hull.move(0, 1);
+			sprite_tank_turret.move(0, 1);
+
+		}
+
+		//----------------------------------------------------------End of Controls-----------------------------------------//
+
+		//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
 		window.clear();
-		window.draw(sprite);
-		window.draw(sprite2);
-		window.draw(shape);
+		window.draw(sprite_green_background);
+		window.draw(sprite_tank_hull);
+		window.draw(sprite_tank_turret);
 		window.display();
 	}
 
