@@ -61,9 +61,11 @@ int main()
 	//--------------------Tank----------------------------//
 	sf::Texture texture_tank_hull;
 	texture_tank_hull.loadFromFile("tank_hull.png");
+	
 
 	sf::Texture texture_tank_turret;
 	texture_tank_turret.loadFromFile("tank_tower.png");
+	
 
 	sf::Sprite sprite_tank_hull;
 	sprite_tank_hull.setTexture(texture_tank_hull);
@@ -80,7 +82,8 @@ int main()
 	sprite_tank_hull.setScale(0.2, 0.2);
 	sprite_tank_turret.setScale(0.2, 0.2);
 
-
+	texture_tank_turret.setSmooth(true);
+	texture_tank_hull.setSmooth(true);
 	//----------------Tank_rotation_and_movement-----------------------------------------------------//
 	int rot_turret = 0;
 	int rot_hull = 0;

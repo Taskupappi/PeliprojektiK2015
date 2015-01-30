@@ -87,6 +87,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="Tank_hull.cpp" />
+    <ClCompile Include="Tank_part.cpp" />
+    <ClCompile Include="Tank_turret.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Tank.h" />
+    <ClInclude Include="Tank_hull.h" />
+    <ClInclude Include="Tank_part.h" />
+    <ClInclude Include="Tank_turret.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
