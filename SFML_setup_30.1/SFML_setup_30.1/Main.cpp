@@ -8,7 +8,7 @@
 #include <math.h>
 
 //#include "Tank_hull.h"
-
+//Terveiset kotikoneelta. GitHub toimii.
 
 #define M_PI 3.14159265358979323846 /* pi */
 
@@ -25,7 +25,7 @@ int main()
 	
 
 	//--------------------------Screen_setup---------------------------------------//
-	sf::Vector2i screen_dimensions(1240, 720);
+	sf::Vector2i screen_dimensions(1280, 720);
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(screen_dimensions.x, screen_dimensions.y), "Tank Hunter Arcade");
 	window.setFramerateLimit(60);
@@ -73,10 +73,12 @@ int main()
 	sf::Sprite sprite_tank_turret;
 	sprite_tank_turret.setTexture(texture_tank_turret);
 
-	sprite_tank_hull.setPosition(450, 450);
+	//Tank is now set relatively to the screen
+	sprite_tank_hull.setPosition(screen_dimensions.x/2, screen_dimensions.y/2);
 	sprite_tank_hull.setOrigin(400, 400);
 
-	sprite_tank_turret.setPosition(450, 450);
+	//Tank is now set relatively to the screen
+	sprite_tank_turret.setPosition(screen_dimensions.x/2, screen_dimensions.y/2);
 	sprite_tank_turret.setOrigin(400, 400);
 
 	sprite_tank_hull.setScale(0.2, 0.2);
@@ -88,11 +90,11 @@ int main()
 	int rot_turret = 0;
 	int rot_hull = 0;
 
-	double speed = 5;
-	double angle = 60 * M_PI / 2;
+	float speed = 5;
+	float angle = 60 * M_PI / 2;
 
-	double move_x = speed * cos(angle);
-	double move_y = speed * sin(angle);
+	float move_x = speed * cos(angle);
+	float move_y = speed * sin(angle);
 	//Sprites[0].move(std::cos(3.14159265 * Sprites[0].getRotation() / 180.f) * (float)Player.getSpeed() * ElapsedTime, std::sin(3.14159265 * Sprites[0].getRotation() / 180.f) * (float)Player.getSpeed() * ElapsedTime);
 
 
@@ -228,16 +230,17 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			sprite_tank_hull.move(0, -1);
-			sprite_tank_turret.move(0, -1);
+			//Tank hull moves now to the direction it faces.
+			sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * 3, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*-3);;
+			sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
 
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			sprite_tank_hull.move(0, 1);
-			sprite_tank_turret.move(0, 1);
-
+			//Tank hull moves now to the direction it faces.
+			sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * -3, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*3);;
+			sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
 		}
 
 		//----------------------------------------------------------End of Controls-----------------------------------------//
