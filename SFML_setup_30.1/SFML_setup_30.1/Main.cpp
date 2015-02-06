@@ -255,7 +255,7 @@ int main()
 			//----------------------------------------------------------End of Controls-----------------------------------------//
 
 			//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-
+			
 			window.clear();
 			window.setView(view);
 			window.draw(map);

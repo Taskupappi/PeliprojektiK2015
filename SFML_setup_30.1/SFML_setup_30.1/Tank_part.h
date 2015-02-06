@@ -8,7 +8,7 @@ class Tank_part
 public:
 
 
-	Tank_part(const Tank_part &Tank_part);
+	//Tank_part();
 	Tank_part();
 	~Tank_part(void);
 
