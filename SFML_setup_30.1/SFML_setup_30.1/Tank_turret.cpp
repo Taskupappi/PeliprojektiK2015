@@ -1,7 +1,7 @@
 #include "Tank_turret.h"
 
 
-Tank_turret::Tank_turret(std::string n, int af, int al, int ari, int are, float rot)
+Tank_turret::Tank_turret(std::string n, int af, int al, int ari, int are, float rot, int am, float acc, float aimt)
 {
 	name = n;
 	armor_front = af;
@@ -9,7 +9,9 @@ Tank_turret::Tank_turret(std::string n, int af, int al, int ari, int are, float 
 	armor_rear = ari;
 	armor_right = are;
 	rotation_speed = rot;
-
+	ammo_count = am;
+	accuracy = acc;
+	aim_time = aimt;
 }
 
 Tank_turret::Tank_turret()
@@ -30,7 +32,7 @@ Tank_turret::~Tank_turret(void)
 }
 
 
-void Tank_turret::rotate(int a)
+void Tank_turret::rotate(float angle)
 {
 
 

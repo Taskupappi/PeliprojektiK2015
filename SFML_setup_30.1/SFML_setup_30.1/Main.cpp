@@ -253,14 +253,14 @@ int main()
 			//_elapsed = 0;
 			//hull_movement_speed_forwards = 0;
 			//hull_movement_speed_backwards = 0;
-
+			
 			key_is_pressed = false;
 		
 		}
 			//----------------------------------------------------------End of Controls-----------------------------------------//
 
 			//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-
+			
 			window.clear();
 			window.draw(sprite_green_background);
 			window.draw(map);

@@ -9,10 +9,11 @@ class Tank_turret :
 public:
 
 	Tank_turret();
-	Tank_turret(std::string name, int af, int al, int ari, int are, float rot);
+	Tank_turret(std::string name, int af, int al, int ari, int are, float rot, int am, float acc, float aimt);
 	~Tank_turret(void);
 
-	void rotate(int a);
+	void rotate(float angle);
+	
 
 protected:
 	std::string name;
@@ -21,6 +22,10 @@ protected:
 	int armor_right;
 	int armor_rear;
 	float rotation_speed;
+	int ammo_count;
+	float accuracy;
+	float aim_time;
+
 
 
 
