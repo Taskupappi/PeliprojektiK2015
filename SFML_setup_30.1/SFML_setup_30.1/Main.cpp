@@ -7,7 +7,6 @@
 #include <cmath>
 #include <math.h>
 
-
 //Classit
 
 #include "TileMap.h"
@@ -64,11 +63,11 @@ int main()
 
 	//--------------------Tank----------------------------//
 	sf::Texture texture_tank_hull;
-	texture_tank_hull.loadFromFile("tank_hull.png");
+	texture_tank_hull.loadFromFile("tank_hull_256.png");
 	
 
 	sf::Texture texture_tank_turret;
-	texture_tank_turret.loadFromFile("tank_tower.png");
+	texture_tank_turret.loadFromFile("tank_tower_256.png");
 	
 
 	sf::Sprite sprite_tank_hull;
@@ -79,14 +78,11 @@ int main()
 
 	//Tank is now set relatively to the screen
 	sprite_tank_hull.setPosition(screen_dimensions.x/2, screen_dimensions.y/2);
-	sprite_tank_hull.setOrigin(400, 400);
+	sprite_tank_hull.setOrigin(128, 128);
 
 	//Tank is now set relatively to the screen
 	sprite_tank_turret.setPosition(screen_dimensions.x/2, screen_dimensions.y/2);
-	sprite_tank_turret.setOrigin(400, 400);
-
-	sprite_tank_hull.setScale(0.2, 0.2);
-	sprite_tank_turret.setScale(0.2, 0.2);
+	sprite_tank_turret.setOrigin(128, 128);
 
 	texture_tank_turret.setSmooth(true);
 	texture_tank_hull.setSmooth(true);
@@ -117,10 +113,18 @@ int main()
 		0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
 		2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
 		0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+		1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
+		0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
+		0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
+		0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
+		2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
+		0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
 	};
 
 	TileMap map;
-	if (!map.load("tileset.png", sf::Vector2u(128, 128), level, 16, 8))
+	if (!map.load("tileset.png", sf::Vector2u(128, 128), level, 32, 16))
 		return -1;
 
 
@@ -270,6 +274,7 @@ int main()
 		//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
 		window.clear();
+		window.setView(view);
 		window.draw(sprite_green_background);
 		window.draw(map);		
 		window.draw(sprite_tank_hull);
