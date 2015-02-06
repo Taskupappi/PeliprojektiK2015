@@ -45,7 +45,7 @@ int main()
 	texture_green_background.loadFromFile("green_background.png");
 	sf::Sprite sprite_green_background;
 	sprite_green_background.setTexture(texture_green_background);
-	sprite_green_background.setPosition(450, 200);
+	sprite_green_background.setPosition(0, 0);
 	//---------------------------------------------------//
 
 
@@ -231,6 +231,7 @@ int main()
 			
 			key_is_pressed = false;
 		}
+		
 		//----------------------------------------------------------End of Controls-----------------------------------------//
 
 		//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
