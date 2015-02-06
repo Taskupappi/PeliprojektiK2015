@@ -91,6 +91,7 @@
     <ClCompile Include="Tank_hull.cpp" />
     <ClCompile Include="Tank_part.cpp" />
     <ClCompile Include="Tank_turret.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +100,7 @@
     <ClInclude Include="Tank_hull.h" />
     <ClInclude Include="Tank_part.h" />
     <ClInclude Include="Tank_turret.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

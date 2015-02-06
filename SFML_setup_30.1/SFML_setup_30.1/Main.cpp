@@ -7,6 +7,10 @@
 #include <cmath>
 #include <math.h>
 
+
+//Classit
+
+#include "TileMap.h"
 //#include "Tank_hull.h"
 //Terveiset kotikoneelta. GitHub toimii.
 
@@ -32,7 +36,7 @@ int main()
 
 
 	//-------------------------------------------------------------//
-
+	
 
 	//-----------------------------Something--------------------------------//
 	//window.setKeyRepeatEnabled(false);
@@ -45,7 +49,7 @@ int main()
 	texture_green_background.loadFromFile("green_background.png");
 	sf::Sprite sprite_green_background;
 	sprite_green_background.setTexture(texture_green_background);
-	sprite_green_background.setPosition(450, 200);
+	sprite_green_background.setPosition(0, 0);
 	//---------------------------------------------------//
 
 
@@ -101,6 +105,23 @@ int main()
 
 	//-----------------------------------------------------------------------------------------------//
 
+	//Tilemap
+
+	const int level[] =
+	{
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+		1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
+		0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
+		0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
+		0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
+		2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
+		0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
+	};
+
+	TileMap map;
+	if (!map.load("tileset.png", sf::Vector2u(128, 128), level, 16, 8))
+		return -1;
 
 
 	//------------------------------------Game_loop-------------------------------------------------//
@@ -233,7 +254,7 @@ int main()
 			//Tank hull moves now to the direction it faces.
 			sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * 3, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*-3);;
 			sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
-
+			view.setCenter(sprite_tank_hull.getPosition());
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -241,6 +262,7 @@ int main()
 			//Tank hull moves now to the direction it faces.
 			sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * -3, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*3);;
 			sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
+			view.setCenter(sprite_tank_hull.getPosition());
 		}
 
 		//----------------------------------------------------------End of Controls-----------------------------------------//
@@ -249,6 +271,7 @@ int main()
 
 		window.clear();
 		window.draw(sprite_green_background);
+		window.draw(map);		
 		window.draw(sprite_tank_hull);
 		window.draw(sprite_tank_turret);
 		window.display();
