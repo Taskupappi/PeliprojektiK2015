@@ -7,6 +7,10 @@
 #include <cmath>
 #include <math.h>
 
+
+//Classit
+
+#include "TileMap.h"
 //#include "Tank_hull.h"
 //Terveiset kotikoneelta. GitHub toimii.
 
@@ -22,7 +26,7 @@ int main()
 
 	//-----------------------------------------------------------------------------//
 
-	
+
 
 	//--------------------------Screen_setup---------------------------------------//
 	sf::Vector2i screen_dimensions(1280, 720);
@@ -85,11 +89,11 @@ int main()
 	//--------------------Tank----------------------------//
 	sf::Texture texture_tank_hull;
 	texture_tank_hull.loadFromFile("tank_hull.png");
-	
+
 
 	sf::Texture texture_tank_turret;
 	texture_tank_turret.loadFromFile("tank_tower.png");
-	
+
 
 	sf::Sprite sprite_tank_hull;
 	sprite_tank_hull.setTexture(texture_tank_hull);
@@ -98,11 +102,11 @@ int main()
 	sprite_tank_turret.setTexture(texture_tank_turret);
 
 	//Tank is now set relatively to the screen
-	sprite_tank_hull.setPosition(screen_dimensions.x/2, screen_dimensions.y/2);
+	sprite_tank_hull.setPosition(screen_dimensions.x / 2, screen_dimensions.y / 2);
 	sprite_tank_hull.setOrigin(400, 400);
 
 	//Tank is now set relatively to the screen
-	sprite_tank_turret.setPosition(screen_dimensions.x/2, screen_dimensions.y/2);
+	sprite_tank_turret.setPosition(screen_dimensions.x / 2, screen_dimensions.y / 2);
 	sprite_tank_turret.setOrigin(400, 400);
 
 	sprite_tank_hull.setScale(0.2, 0.2);
@@ -111,6 +115,27 @@ int main()
 	texture_tank_turret.setSmooth(true);
 	texture_tank_hull.setSmooth(true);
 
+
+
+	//-----------------------------------------------------------------------------------------------//
+
+	//Tilemap
+
+	const int level[] =
+	{
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+		1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
+		0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
+		0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
+		0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
+		2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
+		0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
+	};
+
+	TileMap map;
+	if (!map.load("tileset.png", sf::Vector2u(128, 128), level, 16, 8))
+		return -1;
 
 
 	//------------------------------------Game_loop-------------------------------------------------//
@@ -161,8 +186,8 @@ int main()
 		}
 
 		//---------------------------------Hull--------------------------------------//
-		
-		
+
+
 		bool key_is_pressed = true;
 
 
@@ -175,7 +200,6 @@ int main()
 			{
 				sprite_tank_turret.rotate(-hull_rot_speed);
 				sprite_tank_hull.rotate(-hull_rot_speed);
-
 			}
 
 
@@ -223,25 +247,29 @@ int main()
 				//Tank hull moves now to the direction it faces.
 				sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * -hull_movement_speed_backwards, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*hull_movement_speed_backwards);;
 				sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
+				view.setCenter(sprite_tank_hull.getPosition());
 			}
-			
+
 			//_elapsed = 0;
 			//hull_movement_speed_forwards = 0;
 			//hull_movement_speed_backwards = 0;
-			
+
 			key_is_pressed = false;
-		}
 		
-		//----------------------------------------------------------End of Controls-----------------------------------------//
+		}
+			//----------------------------------------------------------End of Controls-----------------------------------------//
 
-		//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+			//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
-		window.clear();
-		window.draw(sprite_green_background);
-		window.draw(sprite_tank_hull);
-		window.draw(sprite_tank_turret);
-		window.display();
+			window.clear();
+			window.draw(sprite_green_background);
+			window.draw(map);
+			window.draw(sprite_tank_hull);
+			window.draw(sprite_tank_turret);
+			window.display();
+		
+
+		
 	}
-
 	return 0;
 }
