@@ -57,6 +57,30 @@ int main()
 	//----------------------------------------------------------------//
 
 
+	//----------------Tank_rotation_and_movement-----------------------------------------------------//
+	float rot_turret = 0;
+	float rot_hull = 0;
+	float turret_rot_speed = 1.2;
+	float hull_rot_speed = 0.8;
+
+	float o_clock = 1 / 60;
+
+	float hull_movement_acceleration = 0.2;
+	float hull_movement_speed_forwards = 0;
+	float hull_movement_speed_forwards_max = 2.1;
+
+	float hull_movement_speed_backwards = 0;
+	float hull_movement_speed_backwards_max = 0.7;
+
+	float speed = 5;
+	float angle = 60 * M_PI / 2;
+
+	float move_x = speed * cos(angle);
+	float move_y = speed * sin(angle);
+
+
+
+	//-----------------------------------------------------------------------------------------------//
 
 	//--------------------Tank----------------------------//
 	sf::Texture texture_tank_hull;
@@ -86,20 +110,6 @@ int main()
 
 	texture_tank_turret.setSmooth(true);
 	texture_tank_hull.setSmooth(true);
-	//----------------Tank_rotation_and_movement-----------------------------------------------------//
-	int rot_turret = 0;
-	int rot_hull = 0;
-
-	float speed = 5;
-	float angle = 60 * M_PI / 2;
-
-	float move_x = speed * cos(angle);
-	float move_y = speed * sin(angle);
-	//Sprites[0].move(std::cos(3.14159265 * Sprites[0].getRotation() / 180.f) * (float)Player.getSpeed() * ElapsedTime, std::sin(3.14159265 * Sprites[0].getRotation() / 180.f) * (float)Player.getSpeed() * ElapsedTime);
-
-
-
-	//-----------------------------------------------------------------------------------------------//
 
 
 
@@ -134,115 +144,93 @@ int main()
 
 
 
+
+
 		//---------------------------------Turret--------------------------------------//
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-
-
-			rot_turret--;
-
-			if (rot_turret > 360)
-			{
-				rot_turret = 0;
-			}
-			sprite_tank_turret.setRotation(rot_turret);
+			sprite_tank_turret.rotate(-turret_rot_speed);
 
 		}
 
-		/*
-		double move_x = speed * cos(angle);
-		double move_y = speed * sin(angle);
-		*/
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-
-			rot_turret++;
-
-			if (rot_turret > 360)
-			{
-				rot_turret = 0;
-			}
-			sprite_tank_turret.setRotation(rot_turret);
+			sprite_tank_turret.rotate(turret_rot_speed);
 		}
 
 		//---------------------------------Hull--------------------------------------//
+		
+		
+		bool key_is_pressed = true;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+
+		while (key_is_pressed == true)
 		{
+			sf::Time t1 = sf::seconds(0.1f);
+			float _elapsed = t1.asSeconds();
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				rot_turret++;
+				sprite_tank_turret.rotate(-hull_rot_speed);
+				sprite_tank_hull.rotate(-hull_rot_speed);
+
 			}
 
 
 
-			rot_turret--;
-
-			if (rot_turret > 360)
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				rot_turret = 0;
+				sprite_tank_turret.rotate(hull_rot_speed);
+				sprite_tank_hull.rotate(hull_rot_speed);
 			}
-			sprite_tank_turret.setRotation(rot_turret);
 
 
-			rot_hull--;
 
-			if (rot_hull > 360)
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
-				rot_hull = 0;
-			}
-			sprite_tank_hull.setRotation(rot_hull);
 
+
+				hull_movement_speed_forwards += _elapsed * hull_movement_acceleration;
+
+
+				if (hull_movement_speed_forwards > hull_movement_speed_forwards_max)
+				{
+					hull_movement_speed_forwards = hull_movement_speed_forwards_max;
+				}
+
+
+				//Tank hull moves now to the direction it faces.
+				sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * hull_movement_speed_forwards, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*-hull_movement_speed_forwards);
+				sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
+			}
+
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+
+
+				hull_movement_speed_backwards += _elapsed * hull_movement_acceleration;
+
+				if (hull_movement_speed_backwards > hull_movement_speed_backwards_max)
+				{
+					hull_movement_speed_backwards = hull_movement_speed_backwards_max;
+				}
+
+
+				//Tank hull moves now to the direction it faces.
+				sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * -hull_movement_speed_backwards, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*hull_movement_speed_backwards);;
+				sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
+			}
+			
+			//_elapsed = 0;
+			//hull_movement_speed_forwards = 0;
+			//hull_movement_speed_backwards = 0;
+			
+			key_is_pressed = false;
 		}
-
-
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				rot_turret--;
-
-			}
-
-			rot_turret++;
-
-			if (rot_turret > 360)
-			{
-				rot_turret = 0;
-			}
-			sprite_tank_turret.setRotation(rot_turret);
-
-
-
-			rot_hull++;
-
-			if (rot_hull > 360)
-			{
-				rot_hull = 0;
-			}
-			sprite_tank_hull.setRotation(rot_hull);
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			//Tank hull moves now to the direction it faces.
-			sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * 3, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*-3);;
-			sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
-
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			//Tank hull moves now to the direction it faces.
-			sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * -3, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*3);;
-			sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
-		}
-
 		//----------------------------------------------------------End of Controls-----------------------------------------//
 
 		//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
