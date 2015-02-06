@@ -42,16 +42,6 @@ int main()
 	//srand(time(0));
 	//---------------------------------------------------------------//
 
-
-	//----------Background-----------------------------------//
-	sf::Texture texture_green_background;
-	texture_green_background.loadFromFile("green_background.png");
-	sf::Sprite sprite_green_background;
-	sprite_green_background.setTexture(texture_green_background);
-	sprite_green_background.setPosition(0, 0);
-	//---------------------------------------------------//
-
-
 	//--------------------View_options-------------------------------//
 
 	sf::View view;
@@ -233,6 +223,7 @@ int main()
 				//Tank hull moves now to the direction it faces.
 				sprite_tank_hull.move(sin(sprite_tank_hull.getRotation()*3.14159265 / 180) * hull_movement_speed_forwards, cos(sprite_tank_hull.getRotation()*3.14159265 / 180)*-hull_movement_speed_forwards);
 				sprite_tank_turret.setPosition(sprite_tank_hull.getPosition());
+				view.setCenter(sprite_tank_hull.getPosition());
 			}
 
 
@@ -257,7 +248,7 @@ int main()
 			//_elapsed = 0;
 			//hull_movement_speed_forwards = 0;
 			//hull_movement_speed_backwards = 0;
-
+			
 			key_is_pressed = false;
 		
 		}
@@ -266,8 +257,7 @@ int main()
 			//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
 			window.clear();
-		window.setView(view);
-			window.draw(sprite_green_background);
+			window.setView(view);
 			window.draw(map);
 			window.draw(sprite_tank_hull);
 			window.draw(sprite_tank_turret);
