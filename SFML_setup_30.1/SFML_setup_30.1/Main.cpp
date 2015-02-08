@@ -90,13 +90,16 @@ int main()
 	sf::Sprite sprite_tank_turret;
 	sprite_tank_turret.setTexture(texture_tank_turret);
 
-	//Tank is now set relatively to the screen
-	sprite_tank_hull.setPosition(screen_dimensions.x / 2, screen_dimensions.y / 2);
+	//Tank is now set to the beginning of the map
+	sprite_tank_hull.setPosition(2048, 2048 - (screen_dimensions.y / 2));
 	sprite_tank_hull.setOrigin(128, 128);
 
-	//Tank is now set relatively to the screen
-	sprite_tank_turret.setPosition(screen_dimensions.x / 2, screen_dimensions.y / 2);
+	//Tank is now set to the beginning of the map
+	sprite_tank_turret.setPosition(2048, 2048 - (screen_dimensions.y / 2));
 	sprite_tank_turret.setOrigin(128, 128);
+
+	//Setting camera into the right position
+	view.setCenter(sprite_tank_hull.getPosition());
 
 	texture_tank_turret.setSmooth(true);
 	texture_tank_hull.setSmooth(true);
@@ -134,13 +137,13 @@ int main()
 	//Give me some trees...
 	const int level2[] =
 	{
-		1, 2, 0, 3, 1, 1, 1, 0, 0, 1, 2, 2, 3, 1, 1, 1,
-		2, 1, 0, 3, 0, 0, 1, 0, 0, 1, 2, 0, 3, 1, 0, 1,
-		1, 1, 1, 1, 3, 3, 1, 0, 0, 1, 3, 3, 3, 2, 3, 1,
+		1, 2, 0, 3, 1, 1, 2, 0, 0, 1, 2, 2, 3, 1, 1, 1,
+		2, 1, 0, 3, 0, 0, 2, 0, 0, 1, 2, 0, 3, 1, 0, 1,
+		1, 1, 1, 1, 3, 3, 2, 0, 0, 3, 3, 3, 3, 2, 3, 1,
 		3, 1, 0, 1, 1, 0, 1, 0, 0, 1, 2, 3, 3, 1, 0, 1,
-		3, 2, 3, 3, 0, 0, 1, 0, 0, 1, 2, 3, 3, 3, 0, 1,
-		1, 3, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 3, 1,
-		2, 2, 2, 3, 3, 0, 1, 0, 0, 1, 2, 1, 1, 1, 3, 1,
+		3, 2, 3, 3, 0, 0, 3, 0, 0, 3, 2, 3, 3, 3, 0, 1,
+		1, 3, 0, 1, 1, 1, 3, 0, 0, 2, 1, 0, 1, 1, 3, 1,
+		2, 2, 2, 3, 3, 0, 1, 0, 0, 2, 2, 1, 1, 1, 3, 1,
 		1, 1, 0, 3, 1, 0, 1, 0, 0, 1, 2, 0, 3, 1, 0, 1,
 	};
 
