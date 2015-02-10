@@ -5,7 +5,7 @@
 
 Tank_turret::Tank_turret(std::string n, int af, int al,
 	int ari, int are, float rot, int am,
-	float acc, float aimt, int hp) //, sf::Texture tt)
+	float acc, float aimt, int hp, sf::Texture tt)
 {
 	name = n;
 	armor_front = af;
@@ -17,12 +17,13 @@ Tank_turret::Tank_turret(std::string n, int af, int al,
 	accuracy = acc;
 	aim_time = aimt;
 	hit_points = hp;
+	tank_turret_texture = tt;
 	//tank_turret_texture = tt;
 
 
 	tank_turret_texture.loadFromFile("Graphics//tank_tower.png");
 	tank_turret_texture.setSmooth(true);
-	tank_turret_sprite.setTexture(tank_turret_sprite);
+	tank_turret_sprite.setTexture(tank_turret_texture);
 }
 
 Tank_turret::Tank_turret()
@@ -49,18 +50,18 @@ Tank_turret::~Tank_turret(void)
 void Tank_turret::rotate(float angle)
 {
 
-	sf::Sprite->rotate();  // (-rotation_speed);
+	  // (-rotation_speed);
 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		sprite_tank_turret.rotate(-turret_rot_speed);
+		tank_turret_sprite.rotate(-rotation_speed);
 
 	}
 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		sprite_tank_turret.rotate(turret_rot_speed);
+		tank_turret_sprite.rotate(rotation_speed);
 	}
 }

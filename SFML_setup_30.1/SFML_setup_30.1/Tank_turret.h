@@ -11,7 +11,7 @@ public:
 	Tank_turret();
 	Tank_turret(std::string name, int af, int al, 
 		int ari, int are, float rot, int am, 
-		float acc, float aimt, int hp )//, sf::Texture tt);
+		float acc, float aimt, int hp , sf::Texture tt);
 
 	~Tank_turret(void);
 

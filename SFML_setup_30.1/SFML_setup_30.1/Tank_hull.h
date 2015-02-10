@@ -11,13 +11,13 @@ class Tank_hull :
 public:
 
 	Tank_hull(std::string name, int af, int al,
-		int ari, int are, float ac, float splf,
+		int ari, int are, float acw, float acb, float splf,
 		float splb, float w, float tra, sf::Texture tt, int hp);
 	Tank_hull();
 
 	~Tank_hull(void);
 	void cal_acceleration();
-
+	void move();
 
 protected:
 	std::string name;
@@ -25,7 +25,8 @@ protected:
 	int armor_left;
 	int armor_right;
 	int armor_rear;
-	float acceleration;
+	float acceleration_forwards;
+	float acceleration_backwards;
 	float speed_limit_forwards;
 	float speed_limit_backwards;
 	float weight;
@@ -33,6 +34,7 @@ protected:
 	sf::Sprite tank_hull_sprite;
 	int hit_points;
 	sf::Texture tank_hull_texture;
+
 
 
 };
