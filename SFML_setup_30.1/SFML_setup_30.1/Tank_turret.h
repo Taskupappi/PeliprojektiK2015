@@ -9,7 +9,10 @@ class Tank_turret :
 public:
 
 	Tank_turret();
-	Tank_turret(std::string name, int af, int al, int ari, int are, float rot, int am, float acc, float aimt);
+	Tank_turret(std::string name, int af, int al, 
+		int ari, int are, float rot, int am, 
+		float acc, float aimt, int hp )//, sf::Texture tt);
+
 	~Tank_turret(void);
 
 	void rotate(float angle);
@@ -25,7 +28,9 @@ protected:
 	int ammo_count;
 	float accuracy;
 	float aim_time;
-
+	int hit_points;
+	sf::Sprite tank_turret_sprite;
+	sf::Texture tank_turret_texture;
 
 
 

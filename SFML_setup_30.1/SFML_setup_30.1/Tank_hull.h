@@ -4,12 +4,15 @@
 #include "Tank_part.h"
 
 
+
 class Tank_hull :
 	public Tank_part
 {
 public:
 
-	Tank_hull(std::string name, int af, int al, int ari, int are, float ac, float splf, float splb, float w, float tra);
+	Tank_hull(std::string name, int af, int al,
+		int ari, int are, float ac, float splf,
+		float splb, float w, float tra, sf::Texture tt, int hp);
 	Tank_hull();
 
 	~Tank_hull(void);
@@ -27,6 +30,9 @@ protected:
 	float speed_limit_backwards;
 	float weight;
 	float traverse_speed;
+	sf::Sprite tank_hull_sprite;
+	int hit_points;
+	sf::Texture tank_hull_texture;
 
 
 };

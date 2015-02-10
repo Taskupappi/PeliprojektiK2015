@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Tank_hull.cpp" />
     <ClCompile Include="Tank_part.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ammo.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="Tank_hull.h" />

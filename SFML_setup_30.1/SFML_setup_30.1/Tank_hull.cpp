@@ -1,6 +1,9 @@
 #include "Tank_hull.h"
 
-Tank_hull::Tank_hull(std::string n, int af, int al, int ari, int are, float ac, float splf, float splb, float w, float tra)
+Tank_hull::Tank_hull(std::string n, int af, int al,
+	int ari, int are, float ac, float splf,
+	float splb, float w, float tra, sf::Texture tt,
+	int hp)
 {
 	name = n;
 	armor_front = af;
@@ -12,6 +15,8 @@ Tank_hull::Tank_hull(std::string n, int af, int al, int ari, int are, float ac, 
 	speed_limit_backwards = splb;
 	weight = w;
 	traverse_speed = tra;
+	tank_hull_texture = tt;
+	hit_points = hp;
 }
 
 Tank_hull::Tank_hull()

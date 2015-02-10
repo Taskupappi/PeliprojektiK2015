@@ -3,12 +3,16 @@
 
 #include "Tank.h"
 
+
+
+
 class Player
 {
 public:
 	Player();
 	~Player(void);
 	void update();
+
 
 private:
 	int health;

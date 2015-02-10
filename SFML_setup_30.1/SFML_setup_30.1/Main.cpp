@@ -10,7 +10,12 @@
 //Classit
 
 #include "TileMap.h"
-//#include "Tank_hull.h"
+#include "Tank_hull.h"
+#include "Player.h"
+
+
+
+
 //Terveiset kotikoneelta. GitHub toimii.
 
 #define M_PI 3.14159265358979323846 /* pi */
@@ -268,11 +273,12 @@ int main()
 			//_elapsed = 0;
 			//hull_movement_speed_forwards = 0;
 			//hull_movement_speed_backwards = 0;
-			
+
 			key_is_pressed = false;
-		
+
 		}
-			//----------------------------------------------------------End of Controls-----------------------------------------//
+		//----------------------------------------------------------End of Controls-----------------------------------------//
+
 
 			//shape.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 			
